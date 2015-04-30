@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    version = '1.0'
+    sourceCompatibility = 1.7
+
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        // The production code uses the SLF4J logging API at compile time
+        compile 'org.slf4j:slf4j-api:1.7.12'
+    }
+
+    jar {
+        manifest {
+            attributes 'Implementation-Title': project.name,
+                    'Implementation-Version': version
+        }
+    }
+}
+
+project('map4j-dozer') {
+
+    dependencies {
+        compile project(':map4j-api')
+        compile 'net.sf.dozer:dozer:5.5.1'
+    }
+}
+
+project('map4j-orika') {
+
+    dependencies {
+        compile project(':map4j-api')
+        compile(group: 'ma.glasnost.orika', name: 'orika-core', version: '1.4.5', ext: 'jar')
+    }
+}
