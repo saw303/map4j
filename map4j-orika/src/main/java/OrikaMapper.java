@@ -1,3 +1,4 @@
+import ma.glasnost.orika.MapperFacade;
 import ch.silviowangler.map4j.Mapper;
 
 /**
@@ -5,10 +6,18 @@ import ch.silviowangler.map4j.Mapper;
  *
  * @author Silvio Wangler
  */
-public class OrikaMapper implements Mapper {
+public class OrikaMapper implements Mapper
+{
+
+   private MapperFacade mapperFacade;
+
+    public OrikaMapper(MapperFacade mapperFacade) {
+        this.mapperFacade = mapperFacade;
+    }
 
     @Override
-    public <T> T map(Object source, Class<T> targetClass) {
-        return null;
-    }
+   public <T> T map (Object source, Class<T> targetClass)
+   {
+      return mapperFacade.map (source, targetClass);
+   }
 }

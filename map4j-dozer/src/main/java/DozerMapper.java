@@ -1,3 +1,5 @@
+import org.dozer.DozerBeanMapper;
+
 import ch.silviowangler.map4j.Mapper;
 
 /**
@@ -5,10 +7,18 @@ import ch.silviowangler.map4j.Mapper;
  *
  * @author Silvio Wangler
  */
-public class DozerMapper implements Mapper {
+public class DozerMapper implements Mapper
+{
 
-    @Override
-    public <T> T map(Object source, Class<T> targetClass) {
-        return null;
-    }
+   private DozerBeanMapper dozerBeanMapper;
+
+   public DozerMapper(DozerBeanMapper dozerBeanMapper) {
+      this.dozerBeanMapper = dozerBeanMapper;
+   }
+
+   @Override
+   public <T> T map (Object source, Class<T> targetClass)
+   {
+      return dozerBeanMapper.map (source, targetClass);
+   }
 }

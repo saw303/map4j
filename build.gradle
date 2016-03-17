@@ -2,17 +2,29 @@ buildscript {
     repositories {
         jcenter()
     }
+
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+    }
 }
 
-subprojects {
-    apply plugin: 'java'
 
-    version = '1.0'
-    sourceCompatibility = 1.7
+
+allprojects {
 
     repositories {
         jcenter()
     }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.jfrog.bintray'
+
+    version = '0.0.1'
+    sourceCompatibility = 1.7
 
     dependencies {
         // The production code uses the SLF4J logging API at compile time
@@ -25,6 +37,58 @@ subprojects {
                     'Implementation-Version': version
         }
     }
+
+    publishing {
+        publications {
+            JavaPublication(MavenPublication) {
+                from components.java
+
+                artifact sourcesJar {
+                    classifier "sources"
+                }
+
+                groupId 'ch.silviowangler.map4j'
+                artifactId project.name
+                version project.version
+            }
+        }
+    }
+
+    bintray {
+        user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+        key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : System.getenv('BINTRAY_API_KEY')
+        publications = ['JavaPublication']
+        pkg {
+            repo = 'releases'
+            name = 'map4j'
+            licenses = ['Apache-2.0']
+            vcsUrl = 'https://github.com/saw303/map4j.git'
+            labels = ['orika', 'mapper', 'dozer']
+            publicDownloadNumbers = true
+            version {
+                name = project.version
+                desc = 'map4j'
+                vcsTag = project.version
+                released = new Date()
+            }
+        }
+    }
+
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allJava
+
+        from("${rootProject.projectDir}") {
+            include "LICENSE.txt"
+            into "META-INF"
+            expand(dateOfYear: new Date().format('yyyy'))
+        }
+    }
+
+    artifacts {
+        archives sourcesJar
+    }
+
 }
 
 project('map4j-dozer') {
@@ -39,6 +103,6 @@ project('map4j-orika') {
 
     dependencies {
         compile project(':map4j-api')
-        compile(group: 'ma.glasnost.orika', name: 'orika-core', version: '1.4.5', ext: 'jar')
+        compile("ma.glasnost.orika:orika-core:1.4.6")
     }
 }
