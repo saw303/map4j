@@ -9,7 +9,7 @@ import spock.lang.Specification
  */
 class OrikaMapperSpec extends Specification {
 
-    void "hello"() {
+    void "Map PartnerDTO to PartnerVO using Orika"() {
         given:
         MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build()
 
