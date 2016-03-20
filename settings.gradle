@@ -16,6 +16,6 @@ include 'api'
 include 'services:webservice'
 */
 
-include 'map4j-api', 'map4j-dozer', 'map4j-orika'
+include 'map4j-api', 'map4j-dozer', 'map4j-orika', 'map4j-testutil'
 
 rootProject.name = 'map4j'

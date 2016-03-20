@@ -1,6 +1,6 @@
-import org.dozer.DozerBeanMapper;
+package ch.silviowangler.map4j;
 
-import ch.silviowangler.map4j.Mapper;
+import org.dozer.DozerBeanMapper;
 
 /**
  * Created by Silvio Wangler on 30.04.15.
