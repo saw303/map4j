@@ -1,4 +1,4 @@
-# map4j - hide mappers
+# map4j - hide mapper libraries
 
 [![Build Status](https://travis-ci.org/saw303/map4j.svg?branch=master)](https://travis-ci.org/saw303/map4j)
 [ ![Download](https://api.bintray.com/packages/saw303/releases/map4j/images/download.svg) ](https://bintray.com/saw303/releases/map4j/_latestVersion)
