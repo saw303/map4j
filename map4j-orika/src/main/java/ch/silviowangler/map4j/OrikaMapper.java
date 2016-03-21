@@ -22,4 +22,10 @@ public class OrikaMapper implements Mapper
    {
       return mapperFacade.map (source, targetClass);
    }
+
+   @Override
+   public <T> void map (Object source, T target)
+   {
+      mapperFacade.map (source, target);
+   }
 }

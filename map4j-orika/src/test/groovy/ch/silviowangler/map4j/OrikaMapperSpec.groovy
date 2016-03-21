@@ -9,19 +9,21 @@ import spock.lang.Specification
  */
 class OrikaMapperSpec extends Specification {
 
-    void "Map PartnerDTO to PartnerVO using Orika"() {
-        given:
-        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build()
 
-        and:
+    MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build()
+
+    void setup() {
+
         mapperFactory.classMap(PartnerDTO, PartnerVO)
                 .field('vorname', 'firstname')
                 .field('nachname', 'lastname')
                 .field('geburtstag', 'birthdate')
                 .byDefault()
                 .register()
+    }
 
-        and:
+    void "Map PartnerDTO to a new PartnerVO instance using Orika"() {
+        given:
         Mapper mapper = new OrikaMapper(mapperFactory.getMapperFacade())
 
         and:
@@ -29,6 +31,27 @@ class OrikaMapperSpec extends Specification {
 
         when:
         PartnerDTO partnerDTO = mapper.map(partnerVO, PartnerDTO)
+
+        then:
+        partnerDTO
+
+        and:
+        partnerDTO.vorname == partnerVO.firstname
+        partnerDTO.nachname == partnerVO.lastname
+        partnerDTO.geburtstag == partnerVO.birthdate
+        partnerDTO.telephone == partnerVO.telephone
+    }
+
+    void "Map PartnerDTO to an existing PartnerVO instance using Orika"() {
+        given:
+        Mapper mapper = new OrikaMapper(mapperFactory.getMapperFacade())
+
+        and:
+        PartnerVO partnerVO = new PartnerVO(firstname: 'Silvio', lastname: 'Wangler', birthdate: new Date())
+        PartnerDTO partnerDTO = new PartnerDTO()
+
+        when:
+        mapper.map(partnerVO, partnerDTO)
 
         then:
         partnerDTO

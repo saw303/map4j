@@ -21,4 +21,9 @@ public class DozerMapper implements Mapper
    {
       return dozerBeanMapper.map (source, targetClass);
    }
+
+   @Override
+   public <T> void map(Object source, T target) {
+      dozerBeanMapper.map(source, target);
+   }
 }
