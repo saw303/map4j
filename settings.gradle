@@ -8,14 +8,6 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user guide at http://gradle.org/docs/2.3/userguide/multi_project_builds.html
  */
-
-/*
-// To declare projects as part of a multi-project build use the 'include' method
-include 'shared'
-include 'api'
-include 'services:webservice'
-*/
-
-include 'map4j-api', 'map4j-dozer', 'map4j-orika', 'map4j-testutil'
+include 'map4j-api', 'map4j-dozer', 'map4j-orika', 'map4j-testutil', 'map4j-mapstruct:mapstruct', 'map4j-mapstruct:mapstruct-bp'
 
 rootProject.name = 'map4j'

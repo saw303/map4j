@@ -1,0 +1,5 @@
+sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+
+dependencies {
+    compile "org.mapstruct:mapstruct-jdk8:${mapStructVersion}"
+}

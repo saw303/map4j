@@ -25,11 +25,17 @@ subprojects {
     apply plugin: 'com.jfrog.bintray'
 
     version = '0.0.2'
-    sourceCompatibility = 1.7
+    sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_7
 
     dependencies {
         // The production code uses the SLF4J logging API at compile time
         compile 'org.slf4j:slf4j-api:1.7.12'
+
+        println "---> ${project.name}"
+
+        if (project.name != 'map4j-api') {
+            compile project(':map4j-api')
+        }
 
         testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
         testCompile "org.codehaus.groovy:groovy:2.4.6"
@@ -98,8 +104,8 @@ subprojects {
 project('map4j-dozer') {
 
     dependencies {
-        compile project(':map4j-api')
-        compile 'net.sf.dozer:dozer:5.5.1'
+
+        compile "net.sf.dozer:dozer:${dozerVersion}"
 
         testCompile project(':map4j-testutil')
     }
@@ -108,8 +114,8 @@ project('map4j-dozer') {
 project('map4j-orika') {
 
     dependencies {
-        compile project(':map4j-api')
-        compile("ma.glasnost.orika:orika-core:1.4.6")
+
+        compile("ma.glasnost.orika:orika-core:${orikaVersion}")
 
         testCompile project(':map4j-testutil')
     }
