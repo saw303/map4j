@@ -4,14 +4,12 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.6'
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:${artifactoryPluginVersion}"
+        classpath "org.codehaus.groovy:groovy:${groovyVersion}"
     }
 }
 
-
-
 allprojects {
-
     repositories {
         jcenter()
     }
@@ -29,16 +27,16 @@ subprojects {
 
     dependencies {
         // The production code uses the SLF4J logging API at compile time
-        compile 'org.slf4j:slf4j-api:1.7.12'
-
-        println "---> ${project.name}"
+        compile "org.slf4j:slf4j-api:${slf4jVersion}"
 
         if (project.name != 'map4j-api') {
             compile project(':map4j-api')
+
+            testCompile project(':map4j-testutil')
         }
 
-        testCompile "org.spockframework:spock-core:1.0-groovy-2.4"
-        testCompile "org.codehaus.groovy:groovy:2.4.6"
+        testCompile "org.spockframework:spock-core:${spockVersion}"
+        testCompile "org.codehaus.groovy:groovy:${groovyVersion}"
     }
 
     jar {
@@ -106,8 +104,6 @@ project('map4j-dozer') {
     dependencies {
 
         compile "net.sf.dozer:dozer:${dozerVersion}"
-
-        testCompile project(':map4j-testutil')
     }
 }
 
@@ -116,8 +112,6 @@ project('map4j-orika') {
     dependencies {
 
         compile("ma.glasnost.orika:orika-core:${orikaVersion}")
-
-        testCompile project(':map4j-testutil')
     }
 }
 

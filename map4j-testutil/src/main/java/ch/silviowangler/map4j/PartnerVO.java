@@ -12,6 +12,16 @@ public class PartnerVO {
     private Date birthdate;
     private String telephone;
 
+    public PartnerVO() {
+    }
+
+    public PartnerVO(String firstname, String lastname, Date birthdate, String telephone) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.birthdate = birthdate;
+        this.telephone = telephone;
+    }
+
     public String getFirstname() {
         return firstname;
     }

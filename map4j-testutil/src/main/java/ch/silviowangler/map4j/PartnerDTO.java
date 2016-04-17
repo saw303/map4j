@@ -12,6 +12,16 @@ public class PartnerDTO {
     private Date geburtstag;
     private String telephone;
 
+    public PartnerDTO() {
+    }
+
+    public PartnerDTO(String vorname, String nachname, Date geburtstag, String telephone) {
+        this.vorname = vorname;
+        this.nachname = nachname;
+        this.geburtstag = geburtstag;
+        this.telephone = telephone;
+    }
+
     public String getVorname() {
         return vorname;
     }
