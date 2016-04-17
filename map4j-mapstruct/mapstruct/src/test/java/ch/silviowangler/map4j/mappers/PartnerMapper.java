@@ -1,9 +1,6 @@
 package ch.silviowangler.map4j.mappers;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Mappings;
+import org.mapstruct.*;
 
 import ch.silviowangler.map4j.PartnerDTO;
 import ch.silviowangler.map4j.PartnerVO;
@@ -23,10 +20,6 @@ public interface PartnerMapper
    PartnerDTO partnerVoToPartnerDto (PartnerVO partnerVO);
 
 
-   @Mappings({
-           @Mapping(source = "firstname", target = "vorname"),
-           @Mapping(source = "lastname", target = "nachname"),
-           @Mapping(source = "birthdate", target = "geburtstag")
-   })
+   @InheritConfiguration
    void updatePartnerDTOfromPartnerVO(PartnerVO partnerVO, @MappingTarget PartnerDTO partnerDTO);
 }
