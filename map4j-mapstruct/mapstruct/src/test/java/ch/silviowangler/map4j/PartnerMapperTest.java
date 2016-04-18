@@ -6,7 +6,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import ch.silviowangler.map4j.mappers.PartnerMapperImpl;
+import ch.silviowangler.map4j.mappers.PartnerMapper;
 
 
 /**
@@ -24,10 +24,11 @@ public class PartnerMapperTest {
                 PartnerDTO.class,
                 (a, b) -> {
 
+                    PartnerMapper mapper = PartnerMapper.INSTANCE;
                     if (b == null) {
-                        return new PartnerMapperImpl().partnerVoToPartnerDto((PartnerVO) a);
+                        return mapper.partnerVoToPartnerDto((PartnerVO) a);
                     }
-                    new PartnerMapperImpl().updatePartnerDTOfromPartnerVO((PartnerVO) a, (PartnerDTO) b);
+                    mapper.updatePartnerDTOfromPartnerVO((PartnerVO) a, (PartnerDTO) b);
                     return b;
                 }
         );
