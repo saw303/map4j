@@ -1,0 +1,55 @@
+
+ext {
+    javaLanguageLevel = sourceCompatibility.toString()
+    generatedMapperSourcesDir = "${buildDir}/generated-src/mapstruct/test"
+}
+
+configurations {
+    mapstruct
+}
+
+dependencies {
+    testCompile "junit:junit:${junitVersion}"
+
+    mapstruct "org.mapstruct:mapstruct-processor:${mapStructVersion}"
+    mapstruct project(':map4j-testutil')
+    mapstruct  "junit:junit:${junitVersion}"
+}
+
+sourceSets.test {
+    ext.originalJavaSrcDirs = java.srcDirs
+    java.srcDir "${generatedMapperSourcesDir}"
+}
+
+task generateMainMapperClasses(type: JavaCompile) {
+
+    ext.aptDumpDir = file("${buildDir}/tmp/apt/mapstruct")
+    destinationDir = aptDumpDir
+
+    classpath = compileJava.classpath + configurations.mapstruct
+    source = sourceSets.test.originalJavaSrcDirs
+    ext.sourceDestDir = file("$generatedMapperSourcesDir")
+
+    options.define(
+            compilerArgs: [
+                    "-nowarn",
+                    "-proc:only",
+                    "-encoding", "UTF-8",
+                    "-processor", "org.mapstruct.ap.MappingProcessor",
+                    "-s", sourceDestDir.absolutePath,
+                    "-source", project.javaLanguageLevel,
+                    "-target", project.javaLanguageLevel,
+            ]
+    );
+
+    inputs.dir source
+    outputs.dir generatedMapperSourcesDir;
+    doFirst {
+        sourceDestDir.mkdirs()
+    }
+    doLast {
+        aptDumpDir.delete()
+    }
+}
+
+compileJava.dependsOn generateMainMapperClasses

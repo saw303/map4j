@@ -1,3 +1,5 @@
 dependencies {
     compile "org.mapstruct:mapstruct:${mapStructVersion}"
 }
+
+apply from: "${rootDir}/gradle/mapstruct.gradle"
