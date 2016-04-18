@@ -1,4 +1,4 @@
-package ch.silviowangler.map4j;
+package ch.silviowangler.map4j.mapstruct;
 
 import java.util.concurrent.Callable;
 

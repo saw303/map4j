@@ -1,6 +1,8 @@
-package ch.silviowangler.map4j;
+package ch.silviowangler.map4j.mapstruct;
 
 import java.util.function.BiFunction;
+
+import ch.silviowangler.map4j.Mapper;
 
 /**
  * Created by Silvio Wangler on 14/04/16.

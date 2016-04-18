@@ -1,28 +1,32 @@
-package ch.silviowangler.map4j;
+package ch.silviowangler.map4j.mapstruct;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.function.BiFunction;
+import java.util.concurrent.Callable;
 
 /**
  * Created by Silvio Wangler on 16/04/16.
  */
 public final class MapperRegistry {
 
-    private Map<CombinedClassKey, BiFunction> mappers = new HashMap<>();
+    private Map<CombinedClassKey, Callable> mappers = new HashMap<>();
 
-    public void addMapping(Class aClass, Class bClass, BiFunction function) {
-        mappers.put(new CombinedClassKey(aClass, bClass), function);
+    public void addMapping(Class aClass, Class bClass, Callable callable) {
+        mappers.put(new CombinedClassKey(aClass, bClass), callable);
     }
 
-    public <T> BiFunction resolveConsumer(Class<?> sourceClass, Class<T> targetClass) {
+    public <T> Callable<MapperWrapper> resolveConsumer(Class<?> sourceClass, Class<T> targetClass) {
 
-        BiFunction c =  Optional.of(mappers.get(new CombinedClassKey(sourceClass, targetClass)))
-                .orElseThrow(() -> new RuntimeException());
+        CombinedClassKey key = new CombinedClassKey(sourceClass, targetClass);
+        if (mappers.containsKey(key)) {
 
-        return c;
+            Callable callable = mappers.get(key);
+            return callable;
+        }
+        else {
+            throw new RuntimeException();
+        }
     }
 
     private static class CombinedClassKey {

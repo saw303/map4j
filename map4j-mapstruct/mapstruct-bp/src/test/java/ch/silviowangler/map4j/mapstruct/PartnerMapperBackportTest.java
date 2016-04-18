@@ -1,4 +1,4 @@
-package ch.silviowangler.map4j;
+package ch.silviowangler.map4j.mapstruct;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,9 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import ch.silviowangler.map4j.mappers.PartnerMapper;
+import ch.silviowangler.map4j.PartnerDTO;
+import ch.silviowangler.map4j.PartnerVO;
+import ch.silviowangler.map4j.mapstruct.mappers.PartnerMapper;
 
 /**
  * Created by Silvio Wangler on 15/04/16.
@@ -19,18 +21,18 @@ public class PartnerMapperBackportTest
    {
       MapperRegistry registry = new MapperRegistry ();
 
-      registry.addMapping (PartnerVO.class, PartnerDTO.class, new MapperWrapper<PartnerVO, PartnerDTO> ()
+      registry.addMapping (PartnerVO.class, PartnerDTO.class, new MapperWrapper<PartnerVO, PartnerDTO>()
       {
          @Override
          public PartnerDTO createInstance(PartnerVO source)
          {
-            return PartnerMapper.INSTANCE.partnerVoToPartnerDto (source);
+            return PartnerMapper.INSTANCE.createFromSource (source);
          }
 
          @Override
          public void updateInstance(PartnerVO source, PartnerDTO target)
          {
-            PartnerMapper.INSTANCE.updatePartnerDTOfromPartnerVO (source, target);
+            PartnerMapper.INSTANCE.updateFromSource (source, target);
          }
       });
 

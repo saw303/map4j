@@ -1,5 +1,7 @@
 dependencies {
     compile "org.mapstruct:mapstruct:${mapStructVersion}"
+
+    compile project(":map4j-mapstruct:mapstruct-api")
 }
 
 apply from: "${rootDir}/gradle/mapstruct.gradle"

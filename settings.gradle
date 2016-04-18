@@ -8,6 +8,6 @@
  * Detailed information about configuring a multi-project build in Gradle can be found
  * in the user guide at http://gradle.org/docs/2.3/userguide/multi_project_builds.html
  */
-include 'map4j-api', 'map4j-dozer', 'map4j-orika', 'map4j-testutil', 'map4j-mapstruct:mapstruct', 'map4j-mapstruct:mapstruct-bp'
+include 'map4j-api', 'map4j-dozer', 'map4j-orika', 'map4j-testutil', 'map4j-mapstruct:mapstruct', 'map4j-mapstruct:mapstruct-bp', 'map4j-mapstruct:mapstruct-api'
 
 rootProject.name = 'map4j'

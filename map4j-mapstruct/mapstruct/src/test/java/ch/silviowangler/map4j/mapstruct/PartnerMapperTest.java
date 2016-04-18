@@ -1,4 +1,4 @@
-package ch.silviowangler.map4j;
+package ch.silviowangler.map4j.mapstruct;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,7 +6,9 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import ch.silviowangler.map4j.mappers.PartnerMapper;
+import ch.silviowangler.map4j.PartnerDTO;
+import ch.silviowangler.map4j.PartnerVO;
+import ch.silviowangler.map4j.mapstruct.mappers.PartnerMapper;
 
 
 /**
@@ -24,11 +26,11 @@ public class PartnerMapperTest {
                 PartnerDTO.class,
                 (a, b) -> {
 
-                    PartnerMapper mapper = PartnerMapper.INSTANCE;
+                    BaseMapper mapper = PartnerMapper.INSTANCE;
                     if (b == null) {
-                        return mapper.partnerVoToPartnerDto((PartnerVO) a);
+                        return mapper.createFromSource(a);
                     }
-                    mapper.updatePartnerDTOfromPartnerVO((PartnerVO) a, (PartnerDTO) b);
+                    mapper.updateFromSource(a, b);
                     return b;
                 }
         );
