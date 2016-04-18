@@ -5,27 +5,35 @@ import java.util.concurrent.Callable;
 /**
  * Created by Silvio Wangler on 18/04/16.
  */
-public abstract class MapperWrapper implements Callable
+public abstract class MapperWrapper<S, T> implements Callable
 {
 
-   private Object source;
-   private Object target;
+   private S source;
+   private T target;
 
-   public void setSource (Object source)
+   public void setSource (S source)
    {
       this.source = source;
    }
 
-   public void setTarget (Object target)
+   public void setTarget (T target)
    {
       this.target = target;
    }
 
-    public Object getSource() {
-        return source;
-    }
+   public abstract T createInstance(S source);
 
-    public Object getTarget() {
-        return target;
-    }
+   public abstract void updateInstance(S source, T target);
+
+   @Override
+   public Object call () throws Exception
+   {
+
+      if (this.target == null)
+      {
+         return createInstance(this.source);
+      }
+      updateInstance(this.source, this.target);
+      return this.target;
+   }
 }

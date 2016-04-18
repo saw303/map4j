@@ -17,22 +17,20 @@ public class PartnerMapperBackportTest
    @Test
    public void mapPartnerDtoToPartnerVO ()
    {
-
       MapperRegistry registry = new MapperRegistry ();
 
-      registry.addMapping (PartnerVO.class, PartnerDTO.class, new MapperWrapper ()
+      registry.addMapping (PartnerVO.class, PartnerDTO.class, new MapperWrapper<PartnerVO, PartnerDTO> ()
       {
+         @Override
+         public PartnerDTO createInstance(PartnerVO source)
+         {
+            return PartnerMapper.INSTANCE.partnerVoToPartnerDto (source);
+         }
 
          @Override
-         public Object call () throws Exception
+         public void updateInstance(PartnerVO source, PartnerDTO target)
          {
-            PartnerMapper mapper = PartnerMapper.INSTANCE;
-            if (this.getTarget () == null)
-            {
-               return mapper.partnerVoToPartnerDto ((PartnerVO) getSource ());
-            }
-            mapper.updatePartnerDTOfromPartnerVO ((PartnerVO) getSource (), (PartnerDTO) getTarget ());
-            return getTarget ();
+            PartnerMapper.INSTANCE.updatePartnerDTOfromPartnerVO (source, target);
          }
       });
 
