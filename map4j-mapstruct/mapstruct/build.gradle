@@ -2,7 +2,7 @@ sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
 
 dependencies {
     compile "org.mapstruct:mapstruct-jdk8:${mapStructVersion}"
-    compile project(":map4j-mapstruct:mapstruct-api")
+    compile project(":mapstruct-api")
 }
 
 apply from: "${rootDir}/gradle/mapstruct.gradle"
