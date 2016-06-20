@@ -25,7 +25,7 @@ public final class MapperRegistry {
             return callable;
         }
         else {
-            throw new RuntimeException();
+            throw new NoSuchMappingException("No such mapping for source class " + sourceClass.getSimpleName() + " and target class " + targetClass.getSimpleName(), sourceClass, targetClass);
         }
     }
 
