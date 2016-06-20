@@ -19,15 +19,17 @@ public final class MapperRegistry
       mappers.put (new CombinedClassKey (aClass, bClass), function);
    }
 
-   public <T> BiFunction resolveConsumer(Class<?> sourceClass, Class<T> targetClass) {
+   public <T> BiFunction resolveConsumer (Class<?> sourceClass, Class<T> targetClass)
+   {
 
-       NoSuchMappingException ex = new NoSuchMappingException("No such mapping for source class " + sourceClass.getSimpleName() + " and target class " + targetClass.getSimpleName(), sourceClass, targetClass);
+      NoSuchMappingException ex = new NoSuchMappingException ("No such mapping for source class " + sourceClass.getSimpleName () + " and target class " + targetClass.getSimpleName (),
+                                                              sourceClass,
+                                                              targetClass);
 
-        BiFunction c =  Optional.of(mappers.get(new CombinedClassKey(sourceClass, targetClass)))
-                .orElseThrow(() -> ex);
+      BiFunction c = Optional.of (mappers.get (new CombinedClassKey (sourceClass, targetClass))).orElseThrow ( () -> ex);
 
-        return c;
-    }
+      return c;
+   }
    private static class CombinedClassKey
    {
 
