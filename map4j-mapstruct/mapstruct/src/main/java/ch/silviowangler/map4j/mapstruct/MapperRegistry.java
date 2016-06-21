@@ -21,11 +21,12 @@ public final class MapperRegistry
    public <T> BiFunction resolveConsumer (Class<?> sourceClass, Class<T> targetClass)
    {
 
-      NoSuchMappingException ex = new NoSuchMappingException ("No such mapping for source class " + sourceClass.getSimpleName () + " and target class " + targetClass.getSimpleName (),
-                                                              sourceClass,
-                                                              targetClass);
+      final CombinedClassKey combinedClassKey = new CombinedClassKey (sourceClass, targetClass);
 
-      BiFunction c = Optional.of (mappers.get (new CombinedClassKey(sourceClass, targetClass))).orElseThrow ( () -> ex);
+      NoSuchMappingException ex = new NoSuchMappingException ("No such mapping for source class " + combinedClassKey.getA ().getSimpleName () + " and target class "
+               + combinedClassKey.getB ().getSimpleName (), combinedClassKey.getA (), combinedClassKey.getB ());
+
+      BiFunction c = Optional.of (mappers.get (combinedClassKey)).orElseThrow ( () -> ex);
 
       return c;
    }

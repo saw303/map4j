@@ -5,7 +5,7 @@ import java.util.Objects;
 /**
  * Created by Silvio Wangler on 21/06/16.
  */
-class CombinedClassKey
+final class CombinedClassKey
 {
 
    private Class a;
@@ -44,5 +44,13 @@ class CombinedClassKey
           }
       }
       return clazz;
+   }
+
+   public Class getA() {
+      return a;
+   }
+
+   public Class getB() {
+      return b;
    }
 }
