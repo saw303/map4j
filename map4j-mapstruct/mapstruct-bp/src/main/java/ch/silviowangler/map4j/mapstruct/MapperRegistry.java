@@ -2,7 +2,6 @@ package ch.silviowangler.map4j.mapstruct;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.concurrent.Callable;
 
 /**
@@ -26,31 +25,6 @@ public final class MapperRegistry {
         }
         else {
             throw new NoSuchMappingException("No such mapping for source class " + sourceClass.getSimpleName() + " and target class " + targetClass.getSimpleName(), sourceClass, targetClass);
-        }
-    }
-
-    private static class CombinedClassKey {
-
-        private Class a;
-        private Class b;
-
-        public CombinedClassKey(Class a, Class b) {
-            this.a = a;
-            this.b = b;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof CombinedClassKey)) return false;
-            CombinedClassKey that = (CombinedClassKey) o;
-            return Objects.equals(a, that.a) &&
-                    Objects.equals(b, that.b);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(a, b);
         }
     }
 }
