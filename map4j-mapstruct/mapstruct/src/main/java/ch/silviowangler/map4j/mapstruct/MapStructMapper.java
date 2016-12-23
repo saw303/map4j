@@ -16,6 +16,14 @@ public class MapStructMapper implements Mapper {
         this.registry = registry;
     }
 
+    /**
+     * Maps an object to another object with the registered MapStruct Mapper.
+     * The return object will be created within this method
+     * @param source source map object instance
+     * @param targetClass target class
+     * @param <T> the type of the return instance object
+     * @return the mapped object
+     */
     @Override
     public <T> T map(Object source, Class<T> targetClass) {
         BaseMapper baseMapper = registry.resolveBaseMapper(source.getClass(), targetClass);
@@ -27,9 +35,20 @@ public class MapStructMapper implements Mapper {
             return (T) inverseBaseMapper.createFromSourceInverse(source);
         }
         BiFunction function = registry.resolveConsumer(source.getClass(), targetClass);
-        return (T) function.apply(source, null);
+        if(function != null) {
+            return (T) function.apply(source, null);
+        }
+        throw new NoSuchMappingException ("No such mapping for source class " + source.getClass().getSimpleName () + " and target class "
+                + targetClass.getSimpleName (), source.getClass(), targetClass);
     }
 
+    /**
+     * Maps an object to another object with the registered MapStruct Mapper.
+     * The target object will be update by the source objects attributes
+     * @param source source map object instance
+     * @param target target class
+     * @param <T> the type of the target object
+     */
     @Override
     public <T> void map(Object source, T target) {
         BaseMapper baseMapper = registry.resolveBaseMapper(source.getClass(), target.getClass());
@@ -43,6 +62,12 @@ public class MapStructMapper implements Mapper {
             return;
         }
         BiFunction function = registry.resolveConsumer(source.getClass(), target.getClass());
-        function.apply(source, target);
+        if(function != null) {
+            function.apply(source, target);
+            return;
+        }
+        throw new NoSuchMappingException ("No such mapping for source class " + source.getClass().getSimpleName () + " and target class "
+                + target.getClass().getSimpleName (), source.getClass(), target.getClass());
+
     }
 }

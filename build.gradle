@@ -25,8 +25,7 @@ subprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'com.jfrog.bintray'
 
-    version = '0.0.7.6'
-    sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_8
+    version = '0.0.6'
 
     dependencies {
         // The production code uses the SLF4J logging API at compile time
@@ -66,10 +65,8 @@ subprojects {
     }
 
     bintray {
-        //user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
-        //key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : System.getenv('BINTRAY_API_KEY')
-        user = 'stefanloosli'
-        key = '101ee22e8faa08ca867228c0f09e4ded0b520659'
+        user = project.hasProperty('bintrayUser') ? project.property('bintrayUser') : System.getenv('BINTRAY_USER')
+        key = project.hasProperty('bintrayKey') ? project.property('bintrayKey') : System.getenv('BINTRAY_API_KEY')
         publications = ['JavaPublication']
         pkg {
             repo = 'releases'
