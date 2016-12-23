@@ -7,8 +7,7 @@ This project defines a common api for Java object mapping. Similiar to SLF4J map
 
 The only compile time dependency you need to define is
 
-
-    compile 'ch.silviowangler.map4j:map4j-api:0.0.2'
+    compile 'ch.silviowangler.map4j:map4j-api:0.0.6'
 
 or if you automatically would like to stay always on the latest version define
 

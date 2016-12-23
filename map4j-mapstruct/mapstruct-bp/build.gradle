@@ -3,5 +3,5 @@ dependencies {
 
     compile project(":mapstruct-api")
 }
-
+sourceCompatibility = org.gradle.api.JavaVersion.VERSION_1_7
 apply from: "${rootDir}/gradle/mapstruct.gradle"
