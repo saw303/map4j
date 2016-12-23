@@ -57,7 +57,7 @@ subprojects {
                     classifier "sources"
                 }
 
-                groupId 'ch.stefanloosli.map4j'
+                groupId 'ch.silviowangler.map4j'
                 artifactId project.name
                 version project.version
             }
@@ -72,7 +72,7 @@ subprojects {
             repo = 'releases'
             name = 'map4j'
             licenses = ['Apache-2.0']
-            vcsUrl = 'https://github.com/loosli/map4j.git'
+            vcsUrl = 'https://github.com/saw303/map4j.git'
             labels = ['orika', 'mapper', 'dozer']
             publicDownloadNumbers = true
             version {
