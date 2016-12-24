@@ -25,7 +25,7 @@ subprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'com.jfrog.bintray'
 
-    version = '0.0.6'
+    version = '0.0.7'
 
     dependencies {
         // The production code uses the SLF4J logging API at compile time
